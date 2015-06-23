@@ -1,0 +1,218 @@
+/* ------------------------------------------------------------------------------------------------
+
+Shame
+=====
+
+1. 	If it’s a hack, it goes in shame.css.
+2. 	Document all hacks fully:
+  a. 	What part of the codebase does it relate to?
+  b. 	Why was this needed?
+  c. 	How does this fix it?
+  d. 	How might you fix it properly, given more time?
+3. 	Do not blame the developer; if they explained why they had to do it then their reasons are
+probably (hopefully) valid.
+4. 	Try and clean shame.css up when you have some down time.
+
+via: http://csswizardry.com/2013/04/shame-css/
+
+------------------------------------------------------------------------------------------------ */
+
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background: black;
+}
+
+h1 {
+  margin-top: 0;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+h3 {
+  font-size: 1.8rem;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+
+.site-logo,
+.site-title {
+  font-weight: 400;
+  width: 50%;
+  float: left;
+  font-size: 2rem;
+  line-height: 2rem;
+  padding: 0 2rem;
+  text-transform: uppercase;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 0 0  2rem 0;
+  text-align: right;
+}
+
+.site-title {
+  width: 50%;
+  &--location {
+    font-weight: bold;
+  }
+}
+
+.site-logo {
+  width: 50%;
+  text-align: left;
+  clear: right;
+}
+
+.site-intro {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+@include respond-to($mobile-context) {
+  .site-logo,
+  .site-title {
+    font-size: 5rem;
+    line-height: 5rem;
+  }
+}
+
+
+
+.inline-navigation {
+  text-align: center;
+  &--item {
+    transition: all 200ms ease-in-out;
+    transform: translateZ(0);
+    background: rgba(0,0,0,0.7);
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: .5rem 1rem;
+    margin: .5rem;
+    display: inline-block;
+    &:hover {
+      transform: translateY(4px);
+      background: rgba(0,0,0,0.9);
+    }
+    &:active {
+      transform: translateY(4px) scale(0.98);
+    }
+  }
+}
+
+@include respond-to($mobile-context) {
+  .inline-navigation {
+    &--item {
+      font-size: 2rem;
+      padding: 1rem 1.5rem;
+    }
+  }
+}
+
+
+
+.l-splash {
+  padding: 1rem;
+  min-height: 100%;
+  color: white;
+  background-image: url('../images/splash2.jpg');
+  background-size: 2000px auto;
+  background-position: center center;
+  display: flex;
+  align-items: center;
+}
+
+@include respond-to($mobile-context) {
+  .l-splash {
+    padding: 0;
+  }
+  .l-why-hobart,
+  .l-faq,
+  .l-meta {
+    position: relative;
+    background-size: 2000px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    .page--main {
+      &:after,
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      &:after {
+        z-index: 2;
+        background: rgba(0, 0, 0, 0.7);
+      }
+      &:before {
+        background-size: 2000px auto;
+        background-repeat: no-repeat;
+        background-position: 63.9% center;
+        filter: blur(10px);
+        z-index: 1;
+      }
+    }
+  }
+
+  .l-why-hobart,
+  .l-why-hobart .page--main:before {
+    background-image: url('../images/hobart.jpg');
+  }
+
+  .l-faq,
+  .l-faq .page--main:before {
+    background-size: 2200px auto;
+    background-image: url('../images/faq.jpg');
+  }
+
+  .l-meta,
+  .l-meta .page--main:before {
+    background-image: url('../images/contact.jpg');
+  }
+}
+
+.page {
+  padding: 1rem;
+  font-size: 1.25rem;
+  color: white;
+}
+
+@include respond-to($mobile-context) {
+  .page {
+    padding: 0;
+    p {
+      text-align: justify;
+    }
+    &--intro {
+      padding: 3rem 0;
+      width: 30%;
+      float: left;
+      h1 {
+        text-shadow: 0px 0px 1px rgba(100, 100, 100, .9);
+      }
+    }
+    &--main {
+      position: relative;
+      overflow: hidden;
+      padding: 3rem 1.5rem;
+      background: rgba(0,0,0,0.7);
+      width: 60%;
+      float: right;
+      * {
+        position: relative;
+        z-index: 10;
+      }
+    }
+  }
+}
+
+.wrap {
+  @include clearfix;
+  max-width: 980px;
+  margin: 0 auto;
+}
